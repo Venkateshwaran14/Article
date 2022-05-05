@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Article } from 'Models/Article';
 @Component({
   selector: 'app-latest-articlepage',
   templateUrl: './latest-articlepage.component.html',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LatestArticlepageComponent implements OnInit {
 
-  constructor() { }
 
+  @Input() artsrc: string ="https://localhost:7197/Article/GetLatestArticles";
+  totalLength: any;
+  page: number = 1;
+ 
+
+  constructor(private http: HttpClient) { }
   ngOnInit(): void {
-  }
+    this.http
+      .get<any>(this.artsrc)
+      .subscribe((data) => {
+        this.data = data;
+        this.totalLength = data.length;
+        console.log(data)
+       
+      });
+}public data: Article[] = [
+
+ 
+];
 
 }
