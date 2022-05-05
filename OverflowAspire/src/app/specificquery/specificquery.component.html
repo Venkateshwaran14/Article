@@ -1,0 +1,102 @@
+<div>
+    <div class="container">
+      <a [routerLink]="['../report-spam']"><button type="button" class="custom-btn btn-1 btn-3" id="button-code" >Report Spam</button></a>
+    </div>
+  
+    <div class="container p-5 my-1 border">
+      <div class="text-center">
+  
+        <h1>{{querytitle}}</h1>
+  
+      </div>
+      <div class="panel panel-default"><br>
+        {{querypara}}
+  <br>
+  <br>
+        <pre class=" w-500">
+  {{querycode}}
+                      </pre>
+        
+          <h4>{{panelans.length}} Answers</h4>
+          <div [ngClass]="{'limitTextHeight': isReadMore}">
+        
+          
+          <div *ngFor="let paracontent of panelans" >
+          <span class="ans-body"><label><b>ANSWER : </b></label>
+            {{paracontent.content}}
+          
+          </span>
+          <pre class="ans-body "><code> 
+         
+  {{paracontent.coding}}
+   </code></pre>
+  
+   <div class="user-container"><b>Answered by : </b>
+  
+    <h5 class="name">{{paracontent.name}}</h5>
+   
+        </div>
+      <br>
+      <hr>
+        <br>
+      </div>
+    </div>
+  
+  
+          <button type="button" (click)="showText()">
+            {{ isReadMore ? 'Read More Answers': 'Read Less Answers' }}
+          </button>
+          <br>
+          <br>
+       
+          <h5>Comment Your Answer</h5>
+
+          <form #form="ngForm" (ngSubmit)="PostComment()" autocomplete="off">
+            <div class="container">
+              <div class="bg-light p-2">
+                <textarea type="text" name="queryComment" class="form-control" id="queryComment-name"
+                  placeholder="Enter comments" [(ngModel)]="querycomment.comment">
+                      <!-- <textarea class="form-control" name="queryComment" [(ngModel)]="querycomment.comment"></textarea> -->
+              </div>
+            </div>
+         
+          <div class="mt-2 text-right">
+            <button class="custom-btn btn-1 btn-2" id="button-code" type="submit">Post comment</button>
+          </div>
+        </form>
+          <div class="mt-2 ">
+            <button type="button " class="btnpad1 btn-1" (click)="openpopup()">
+              Add code
+            </button>
+                </div>
+              </div>
+  
+              <!-- The Modal -->
+    <div class="modal" id="myModal" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title ">Add code</h4>
+
+          </div>
+          <form #form="ngForm" (ngSubmit)="PostCode()" autocomplete="off">
+            <div class="bg-light p-2">
+              <textarea class="form-control" contenteditable="true" name="querycomment" 
+                id="querycomment-name" placeholder="Enter code" [(ngModel)]="querycomment.coding"></textarea>
+                    </div>
+  
+                    <div class="modal-footer">
+                      <button type="button" class="custom-btn btn-1 btn-2" (click)="closePopup()">Cancel</button>
+                      <button type="submit" class="custom-btn btn-1 btn-2">Post</button>
+                    </div>
+                  </form>
+                    <!-- Modal footer -->
+                   
+                 
+                </div>
+              </div>
+            </div>
+        
+  
